@@ -644,7 +644,14 @@ ac_includes_default="\
 #endif"
 
 ac_header_c_list=
-ac_subst_vars='LTLIBOBJS
+ac_subst_vars='HAVE_ZPOOL_GET_STATUS_CONST
+HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST
+HAVE_NVLIST_ADD_STRING_ARRAY_CONST
+HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST
+HAVE_NVPAIR_VALUE_STRING_CONST
+HAVE_ZFS_USERSPACE_CB
+HAVE_ZPOOL_ADD
+LTLIBOBJS
 LIBOBJS
 HAVE_THREAD_INIT_FINI
 HAVE_NVPAIR_IN_SYS
@@ -4351,6 +4358,181 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam \
     conftest$ac_exeext conftest.$ac_ext
 
 
+
+# OpenZFS 2.4 API changes. Treat incompatible pointer warnings as errors
+# during these probes only, including on older GCC versions.
+py_libzfs_save_CFLAGS=$CFLAGS
+CFLAGS="$CFLAGS -Werror=incompatible-pointer-types"
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_ZPOOL_ADD" >&5
+printf "%s" "checking HAVE_ZPOOL_ADD... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+zpool_add(NULL, NULL, 1);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_ZPOOL_ADD=3
+else $as_nop
+  HAVE_ZPOOL_ADD=2
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_ZPOOL_ADD" >&5
+printf "%s\n" "$HAVE_ZPOOL_ADD" >&6; }
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_ZFS_USERSPACE_CB" >&5
+printf "%s" "checking HAVE_ZFS_USERSPACE_CB... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+zfs_userspace_cb_t cb = NULL;
+(void) cb(NULL, NULL, 0, 0, 0);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_ZFS_USERSPACE_CB=5
+else $as_nop
+  HAVE_ZFS_USERSPACE_CB=4
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_ZFS_USERSPACE_CB" >&5
+printf "%s\n" "$HAVE_ZFS_USERSPACE_CB" >&6; }
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_ZPOOL_GET_STATUS_CONST" >&5
+printf "%s" "checking HAVE_ZPOOL_GET_STATUS_CONST... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+const char *value;
+(void) zpool_get_status(NULL, &value, NULL);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_ZPOOL_GET_STATUS_CONST=1
+else $as_nop
+  HAVE_ZPOOL_GET_STATUS_CONST=0
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_ZPOOL_GET_STATUS_CONST" >&5
+printf "%s\n" "$HAVE_ZPOOL_GET_STATUS_CONST" >&6; }
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_NVPAIR_VALUE_STRING_CONST" >&5
+printf "%s" "checking HAVE_NVPAIR_VALUE_STRING_CONST... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+const char *value;
+(void) nvpair_value_string(NULL, &value);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_NVPAIR_VALUE_STRING_CONST=1
+else $as_nop
+  HAVE_NVPAIR_VALUE_STRING_CONST=0
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_NVPAIR_VALUE_STRING_CONST" >&5
+printf "%s\n" "$HAVE_NVPAIR_VALUE_STRING_CONST" >&6; }
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST" >&5
+printf "%s" "checking HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+const char **value;
+uint_t count;
+(void) nvpair_value_string_array(NULL, &value, &count);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST=1
+else $as_nop
+  HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST=0
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST" >&5
+printf "%s\n" "$HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST" >&6; }
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_NVLIST_ADD_STRING_ARRAY_CONST" >&5
+printf "%s" "checking HAVE_NVLIST_ADD_STRING_ARRAY_CONST... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+const char *value = NULL;
+(void) nvlist_add_string_array(NULL, NULL, &value, 0);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_NVLIST_ADD_STRING_ARRAY_CONST=1
+else $as_nop
+  HAVE_NVLIST_ADD_STRING_ARRAY_CONST=0
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_NVLIST_ADD_STRING_ARRAY_CONST" >&5
+printf "%s\n" "$HAVE_NVLIST_ADD_STRING_ARRAY_CONST" >&6; }
+
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST" >&5
+printf "%s" "checking HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <libzfs.h>
+int
+main (void)
+{
+const nvlist_t *value = NULL;
+(void) nvlist_add_nvlist_array(NULL, NULL, &value, 0);
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"
+then :
+  HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST=1
+else $as_nop
+  HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST=0
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST" >&5
+printf "%s\n" "$HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST" >&6; }
+
+CFLAGS=$py_libzfs_save_CFLAGS
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Checking function signature of zpool_get_status" >&5
 printf "%s\n" "$as_me: Checking function signature of zpool_get_status" >&6;}

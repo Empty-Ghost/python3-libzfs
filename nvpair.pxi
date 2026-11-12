@@ -53,7 +53,7 @@ cdef class NVList(object):
 
     cdef object __get_value(self, nvpair.nvpair_t* pair, wrap_dict=True):
         cdef nvpair.nvlist_t *nested
-        cdef char *cstr
+        cdef nvpair.nvpair_string_char *cstr
         cdef void *carray
         cdef uint_t carraylen
         cdef bint boolean
@@ -144,8 +144,8 @@ cdef class NVList(object):
             return [x for x in (<uint64_t *>carray)[:carraylen]]
 
         if datatype == nvpair.DATA_TYPE_STRING_ARRAY:
-            nvpair.nvpair_value_string_array(pair, <char***>&carray, &carraylen)
-            return [x for x in (<char**>carray)[:carraylen]]
+            nvpair.nvpair_value_string_array(pair, <nvpair.nvpair_string_array_char***>&carray, &carraylen)
+            return [x for x in (<nvpair.nvpair_string_array_char**>carray)[:carraylen]]
 
         if datatype == nvpair.DATA_TYPE_NVLIST:
             nvpair.nvpair_value_nvlist(pair, &nested)
@@ -260,7 +260,10 @@ cdef class NVList(object):
                 for idx, i in enumerate(value):
                     (<char**>carray)[idx] = i
 
-                nvpair.nvlist_add_string_array(self.handle, key, <char**>carray, len(value))
+                IF HAVE_NVLIST_ADD_STRING_ARRAY_CONST:
+                    nvpair.nvlist_add_string_array(self.handle, key, <const char * const *>carray, len(value))
+                ELSE:
+                    nvpair.nvlist_add_string_array(self.handle, key, <char**>carray, len(value))
 
             if typeid == nvpair.DATA_TYPE_BOOLEAN_ARRAY:
                 carray = malloc(len(value) * sizeof(char*))
@@ -339,7 +342,10 @@ cdef class NVList(object):
                     cnvlist = <NVList>i
                     (<uintptr_t*>carray)[idx] = <uintptr_t>cnvlist.handle
 
-                nvpair.nvlist_add_nvlist_array(self.handle, key, <nvpair.nvlist_t**>carray, len(value))
+                IF HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST:
+                    nvpair.nvlist_add_nvlist_array(self.handle, key, <const nvpair.nvlist_t * const *>carray, len(value))
+                ELSE:
+                    nvpair.nvlist_add_nvlist_array(self.handle, key, <nvpair.nvlist_t**>carray, len(value))
 
             if carray != NULL:
                 free(carray)

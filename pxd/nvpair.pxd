@@ -3,6 +3,16 @@
 
 include "config.pxi"
 
+IF HAVE_NVPAIR_VALUE_STRING_CONST:
+    ctypedef const char nvpair_string_char
+ELSE:
+    ctypedef char nvpair_string_char
+
+IF HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST:
+    ctypedef const char nvpair_string_array_char
+ELSE:
+    ctypedef char nvpair_string_array_char
+
 
 IF HAVE_NVPAIR_IN_SYS:
 	cdef extern from 'sys/nvpair.h' nogil:
@@ -102,8 +112,14 @@ IF HAVE_NVPAIR_IN_SYS:
 		int nvlist_add_uint32_array(nvlist_t *, const char *, uint32_t *, uint_t)
 		int nvlist_add_int64_array(nvlist_t *, const char *, int64_t *, uint_t)
 		int nvlist_add_uint64_array(nvlist_t *, const char *, uint64_t *, uint_t)
-		int nvlist_add_string_array(nvlist_t *, const char *, char * const *, uint_t)
-		int nvlist_add_nvlist_array(nvlist_t *, const char *, nvlist_t **, uint_t)
+		IF HAVE_NVLIST_ADD_STRING_ARRAY_CONST:
+			int nvlist_add_string_array(nvlist_t *, const char *, const char * const *, uint_t)
+		ELSE:
+			int nvlist_add_string_array(nvlist_t *, const char *, char * const *, uint_t)
+		IF HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST:
+			int nvlist_add_nvlist_array(nvlist_t *, const char *, const nvlist_t * const *, uint_t)
+		ELSE:
+			int nvlist_add_nvlist_array(nvlist_t *, const char *, nvlist_t **, uint_t)
 		int nvlist_add_hrtime(nvlist_t *, const char *, hrtime_t)
 		int nvlist_add_double(nvlist_t *, const char *, double)
 
@@ -163,7 +179,7 @@ IF HAVE_NVPAIR_IN_SYS:
 		int nvpair_value_uint32(nvpair_t *, uint32_t *)
 		int nvpair_value_int64(nvpair_t *, int64_t *)
 		int nvpair_value_uint64(nvpair_t *, uint64_t *)
-		int nvpair_value_string(nvpair_t *, char **)
+		int nvpair_value_string(nvpair_t *, nvpair_string_char **)
 		int nvpair_value_nvlist(nvpair_t *, nvlist_t **)
 		int nvpair_value_boolean_array(nvpair_t *, boolean_t **, uint_t *)
 		int nvpair_value_byte_array(nvpair_t *, uchar_t **, uint_t *)
@@ -175,7 +191,7 @@ IF HAVE_NVPAIR_IN_SYS:
 		int nvpair_value_uint32_array(nvpair_t *, uint32_t **, uint_t *)
 		int nvpair_value_int64_array(nvpair_t *, int64_t **, uint_t *)
 		int nvpair_value_uint64_array(nvpair_t *, uint64_t **, uint_t *)
-		int nvpair_value_string_array(nvpair_t *, char ***, uint_t *)
+		int nvpair_value_string_array(nvpair_t *, nvpair_string_array_char ***, uint_t *)
 		int nvpair_value_nvlist_array(nvpair_t *, nvlist_t ***, uint_t *)
 		int nvpair_value_hrtime(nvpair_t *, hrtime_t *)
 		int nvpair_value_double(nvpair_t *, double *)
@@ -346,8 +362,14 @@ ELSE:
 		int nvlist_add_uint32_array(nvlist_t *, const char *, uint32_t *, uint_t)
 		int nvlist_add_int64_array(nvlist_t *, const char *, int64_t *, uint_t)
 		int nvlist_add_uint64_array(nvlist_t *, const char *, uint64_t *, uint_t)
-		int nvlist_add_string_array(nvlist_t *, const char *, char * const *, uint_t)
-		int nvlist_add_nvlist_array(nvlist_t *, const char *, nvlist_t **, uint_t)
+		IF HAVE_NVLIST_ADD_STRING_ARRAY_CONST:
+			int nvlist_add_string_array(nvlist_t *, const char *, const char * const *, uint_t)
+		ELSE:
+			int nvlist_add_string_array(nvlist_t *, const char *, char * const *, uint_t)
+		IF HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST:
+			int nvlist_add_nvlist_array(nvlist_t *, const char *, const nvlist_t * const *, uint_t)
+		ELSE:
+			int nvlist_add_nvlist_array(nvlist_t *, const char *, nvlist_t **, uint_t)
 		int nvlist_add_hrtime(nvlist_t *, const char *, hrtime_t)
 		int nvlist_add_double(nvlist_t *, const char *, double)
 
@@ -407,7 +429,7 @@ ELSE:
 		int nvpair_value_uint32(nvpair_t *, uint32_t *)
 		int nvpair_value_int64(nvpair_t *, int64_t *)
 		int nvpair_value_uint64(nvpair_t *, uint64_t *)
-		int nvpair_value_string(nvpair_t *, char **)
+		int nvpair_value_string(nvpair_t *, nvpair_string_char **)
 		int nvpair_value_nvlist(nvpair_t *, nvlist_t **)
 		int nvpair_value_boolean_array(nvpair_t *, boolean_t **, uint_t *)
 		int nvpair_value_byte_array(nvpair_t *, uchar_t **, uint_t *)
@@ -419,7 +441,7 @@ ELSE:
 		int nvpair_value_uint32_array(nvpair_t *, uint32_t **, uint_t *)
 		int nvpair_value_int64_array(nvpair_t *, int64_t **, uint_t *)
 		int nvpair_value_uint64_array(nvpair_t *, uint64_t **, uint_t *)
-		int nvpair_value_string_array(nvpair_t *, char ***, uint_t *)
+		int nvpair_value_string_array(nvpair_t *, nvpair_string_array_char ***, uint_t *)
 		int nvpair_value_nvlist_array(nvpair_t *, nvlist_t ***, uint_t *)
 		int nvpair_value_hrtime(nvpair_t *, hrtime_t *)
 		int nvpair_value_double(nvpair_t *, double *)

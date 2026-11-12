@@ -2842,7 +2842,7 @@ cdef class ZFSPool(object):
 
     property status_code:
         def __get__(self):
-            cdef char* msg_id
+            cdef libzfs.zpool_status_char *msg_id
             if self.handle != NULL:
                 IF HAVE_ZPOOL_GET_STATUS == 3:
                     return PoolStatus(libzfs.zpool_get_status(self.handle, &msg_id, NULL))
@@ -3131,7 +3131,10 @@ cdef class ZFSPool(object):
         cdef int ret
 
         with nogil:
-            ret = libzfs.zpool_add(self.handle, vd.nvlist.handle)
+            IF HAVE_ZPOOL_ADD == 3:
+                ret = libzfs.zpool_add(self.handle, vd.nvlist.handle, True)
+            ELSE:
+                ret = libzfs.zpool_add(self.handle, vd.nvlist.handle)
 
         if ret != 0:
             raise self.root.get_error()
@@ -3579,11 +3582,21 @@ cdef class ZFSResource(ZFSObject):
         if ret != 0:
             raise self.root.get_error()
 
-    @staticmethod
-    cdef int _userspace_cb(void *data, const char *domain, uint32_t rid, uint64_t space) nogil:
-        with gil:
-            result = <list>data
-            result.append({'domain': domain, 'rid': rid, 'space': space})
+    IF HAVE_ZFS_USERSPACE_CB == 5:
+        @staticmethod
+        cdef int _userspace_cb(void *data, const char *domain, uint32_t rid, uint64_t space, uint64_t default_quota) nogil:
+            # Preserve the public result format across libzfs versions.
+            with gil:
+                result = <list>data
+                result.append({'domain': domain, 'rid': rid, 'space': space})
+            return 0
+    ELSE:
+        @staticmethod
+        cdef int _userspace_cb(void *data, const char *domain, uint32_t rid, uint64_t space) nogil:
+            with gil:
+                result = <list>data
+                result.append({'domain': domain, 'rid': rid, 'space': space})
+            return 0
 
     def userspace(self, quota_props):
         results = {}

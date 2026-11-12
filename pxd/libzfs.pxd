@@ -2,6 +2,11 @@
 # cython: language_level=3, c_string_type=unicode, c_string_encoding=default
 
 include "config.pxi"
+
+IF HAVE_ZPOOL_GET_STATUS_CONST:
+    ctypedef const char zpool_status_char
+ELSE:
+    ctypedef char zpool_status_char
 include "zpool_status.pxi"
 
 IF HAVE_SENDFLAGS_T_TYPEDEF:
@@ -201,7 +206,10 @@ cdef extern from "libzfs.h" nogil:
     extern int zpool_create(libzfs_handle_t *, const char *, nvpair.nvlist_t *,
         nvpair.nvlist_t *, nvpair.nvlist_t *)
     extern int zpool_destroy(zpool_handle_t *, const char *)
-    extern int zpool_add(zpool_handle_t *, nvpair.nvlist_t *)
+    IF HAVE_ZPOOL_ADD == 3:
+        extern int zpool_add(zpool_handle_t *, nvpair.nvlist_t *, boolean_t)
+    ELSE:
+        extern int zpool_add(zpool_handle_t *, nvpair.nvlist_t *)
 
     IF HAVE_ZPOOL_SCAN == 3:
         extern int zpool_scan(zpool_handle_t *, zfs.pool_scan_func_t, zfs.pool_scrub_cmd_t)
@@ -251,9 +259,9 @@ cdef extern from "libzfs.h" nogil:
         extern int zpool_events_next(libzfs_handle_t *, nvpair.nvlist_t **, int *, unsigned, int);
 
     IF HAVE_ZPOOL_GET_STATUS == 3 and HAVE_ZPOOL_ERRATA_T_ENUM:
-        extern zpool_status_t zpool_get_status(zpool_handle_t *, char **, zfs.zpool_errata_t *)
+        extern zpool_status_t zpool_get_status(zpool_handle_t *, zpool_status_char **, zfs.zpool_errata_t *)
     ELSE:
-        extern zpool_status_t zpool_get_status(zpool_handle_t *, char **)
+        extern zpool_status_t zpool_get_status(zpool_handle_t *, zpool_status_char **)
 
     extern zpool_status_t zpool_import_status(nvpair.nvlist_t *, char **)
     extern void zpool_dump_ddt(const zfs.ddt_stat_t *dds, const zfs.ddt_histogram_t *ddh)
@@ -485,7 +493,10 @@ cdef extern from "libzfs.h" nogil:
     ELSE:
         extern uint64_t zvol_volsize_to_reservation(uint64_t, nvpair.nvlist_t *)
 
-    ctypedef int (*zfs_userspace_cb_t)(void *, const char *, uint32_t, uint64_t) # XXX: uint32_t should be uid_t
+    IF HAVE_ZFS_USERSPACE_CB == 5:
+        ctypedef int (*zfs_userspace_cb_t)(void *, const char *, uint32_t, uint64_t, uint64_t)
+    ELSE:
+        ctypedef int (*zfs_userspace_cb_t)(void *, const char *, uint32_t, uint64_t)
 
     extern int zfs_userspace(zfs_handle_t *, zfs.zfs_userquota_prop_t, zfs_userspace_cb_t, void *)
 

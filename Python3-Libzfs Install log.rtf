@@ -1,0 +1,445 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2907
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red91\green157\blue93;\red25\green29\blue39;}
+{\*\expandedcolortbl;;\cssrgb\c42416\c66728\c44152;\csgenericrgb\c9839\c11388\c15260\c95000;}
+\margl1440\margr1440\vieww24780\viewh17100\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \CocoaLigature0 justin@srv:~$ cd python3-libzfs/\
+justin@srv:~/python3-libzfs$ ./configure --prefix=/usr\
+make\
+sudo make install\
+configure: loading site script /usr/share/config.site\
+checking for gcc... gcc\
+checking whether the C compiler works... yes\
+checking for C compiler default output file name... a.out\
+checking for suffix of executables... \
+checking whether we are cross compiling... no\
+checking for suffix of object files... o\
+checking whether the compiler supports GNU C... yes\
+checking whether gcc accepts -g... yes\
+checking for gcc option to enable C11 features... none needed\
+\
+-----------------------------------\
+   RUNNING TESTS ON zfs.h HEADER\
+-----------------------------------\
+checking for stdio.h... yes\
+checking for stdlib.h... yes\
+checking for string.h... yes\
+checking for inttypes.h... yes\
+checking for stdint.h... yes\
+checking for strings.h... yes\
+checking for sys/stat.h... yes\
+checking for sys/types.h... yes\
+checking for unistd.h... yes\
+checking for sys/types.h... (cached) yes\
+checking for sys/fs/zfs.h... yes\
+checking for ZFS_MAX_DATASET_NAME_LEN defined in sys/fs/zfs.h... yes\
+configure: Checking existence of special classes in zfs header by verifying ZPOOL_CONFIG_ALLOCATION_BIAS existence\
+checking for ZPOOL_CONFIG_ALLOCATION_BIAS defined in sys/fs/zfs.h... yes\
+configure: Checking signature of zfs_prop_valid_for_type in zfs header\
+configure: 3 PARAMS\
+configure: Checking existence of VDEV_AUX_ASHIFT_TOO_BIG enum in zfs header\
+configure: OK\
+configure: Checking existence of zpool_errata_t\
+configure: OK\
+configure: Checking typedef pool_scrub_cmt_t in zfs header\
+configure: OK\
+configure: Verifying existence of zpool_rewind_policy_t\
+configure: NOT FOUND\
+configure: Verifying existence of zpool_load_policy_t\
+configure: OK\
+\
+----------------------------------------\
+   RUNNING TESTS ON libzutil.h HEADER\
+----------------------------------------\
+checking for libzutil.h... yes\
+configure: OK\
+configure: Checking existence of zpool_read_label in libzutil.h header\
+configure: OK\
+configure: Checking existence of zpool_search_import in libzutil.h header\
+configure: OK\
+\
+--------------------------------------\
+   RUNNING TESTS ON libzfs.h HEADER\
+--------------------------------------\
+checking for libzfs.h... yes\
+configure: Checking zpool_vdev_attach parameters\
+configure: 6 params\
+configure: Checking for existence of zfs_foreach_mountpoint\
+configure: OK\
+configure: Checking function signature zvol_volsize_to_reservation\
+configure: 3 PARAMS\
+configure: Checking existence of zpool_search_import in libzfs.h header\
+configure: NOT FOUND\
+configure: Checking existence of zpool_events_next in libzfs.h header\
+configure: OK\
+configure: Checking existence of zpool_read_label with 2 params in libzfs.h header\
+configure: NOT FOUND\
+configure: Checking existence of zpool_read_label with 3 params in libzfs.h header\
+configure: Checking existence of ZFS Native encryption support  in libzfs.h header\
+configure: SUPPORTED\
+configure: Checking existence of vs_*_ashift in fs/zfs.h header\
+configure: OK\
+configure: Checking function signature of zpool_get_status\
+configure: 3 PARAMS\
+configure: Checking function signature of zpool_scan\
+configure: 3 params\
+configure: Checking function signature of zfs_share\
+configure: 2 params\
+configure: Checking function signature of zfs_iter_filesystems\
+configure: 3 params\
+configure: Checking function signature of zfs_iter_snapspec\
+configure: 4 params\
+configure: Checking function signature of zfs_iter_dependents\
+configure: 4 params\
+configure: Checking function signature of zfs_iter_bookmarks\
+configure: 3 params\
+configure: Checking function signature of zfs_iter_snapshots_sorted\
+configure: 5 params\
+configure: Checking function signature of zfs_iter_children\
+configure: 3 params\
+configure: Checking function signature of zfs_send_one\
+configure: 3 params\
+configure: Checking EZFS_SCRUB_PAUSED presence\
+configure: OK\
+configure: Checking ZPOOL_STATUS_ERRATA presence\
+configure: OK\
+configure: Checking ZPOOL_STATUS_REBUILDING presence\
+configure: OK\
+configure: Checking ZPOOL_STATUS_REBUILD_SCRUB presence\
+configure: OK\
+configure: Checking ZPOOL_STATUS_COMPATIBILITY_ERR presence\
+configure: OK\
+configure: Checking ZPOOL_STATUS_INCOMPATIBLE_FEAT presence\
+configure: OK\
+configure: Checking LZC_SEND_FLAG_EMBED_DATA presence\
+configure: OK\
+configure: Checking params for zfs_receive\
+configure: 6 params\
+configure: Checking existence of zfs_send_resume and zfs_send_resume_token_to_nvlist\
+configure: OK\
+checking for ZFS_MAXNAMELEN defined in libzfs.h... no\
+configure: Checking existence of renameflags_t in libzfs.h\
+configure: OK\
+configure: Checking renameflags_t member names in libzfs.h\
+configure: RECURSIVE member found\
+configure: Checking function signature of zfs_rename in libzfs.h\
+configure: 3 PARAMS\
+checking for ZPOOL_MAXNAMELEN defined in libzfs.h... no\
+configure: Checking for resumable member in recvflags_t struct\
+configure: OK\
+configure: Checking typedef sendflags_t in libzfs header\
+configure: OK\
+configure: Checking attribute name for verbose in sendflags_t struct\
+configure: Attribute named as verbosity in sendflags_t struct\
+configure: Checking for dedup member in sendflags_t struct\
+configure: NOT FOUND\
+configure: Checking for compress member in sendflags_t struct\
+configure: OK\
+configure: Checking for raw member in sendflags_t struct\
+configure: OK\
+configure: Checking for backup member in sendflags_t struct\
+configure: OK\
+configure: Checking for holds member in sendflags_t struct\
+configure: OK\
+configure: Checking for saved member in sendflags_t struct\
+configure: OK\
+configure: Checking for progressastitle member in sendflags_t struct\
+configure: OK\
+\
+-------------------------------------------\
+   RUNNING TESTS ON libzfs_core.h HEADER\
+-------------------------------------------\
+checking for libzfs_core.h... yes\
+configure: Verifying lzc_bookmark existence\
+configure: OK\
+configure: Verifying existence and params of lzc_send_space\
+configure: 4 params\
+configure: Verifying lzc_sync existence\
+configure: OK\
+configure: Verifying lzc_wait existence\
+configure: OK\
+\
+-----------------------------------------------\
+   RUNNING TESTS ON zfeature_common.h HEADER\
+-----------------------------------------------\
+configure: Verifying existence of zfeature_common.h\
+checking for zfeature_common.h... yes\
+configure: OK\
+configure: Checking supported SPA features\
+\
+-----------------------------------------\
+   RUNNING TESTS ON zfs_ioctl.h HEADER\
+-----------------------------------------\
+configure: Verifying existence of zfs_ioctl.h\
+checking for sys/zfs_ioctl.h... no\
+configure: NOT FOUND\
+\
+--------------------------------------\
+   RUNNING TESTS ON nvpair.h HEADER\
+--------------------------------------\
+checking for sys/nvpair.h... yes\
+configure: Nvpair.h header under sys\
+\
+--------------------------------------------------------\
+   RUNNING TESTS ON sys/zfs_context_userland.h HEADER\
+--------------------------------------------------------\
+checking for sys/zfs_context_userland.h... no\
+\
+----------------------\
+   GENERATING FILES\
+----------------------\
+configure: creating ./config.status\
+config.status: creating pxd/config.pxi\
+config.status: creating pxd/sendflags.pxi\
+config.status: creating pxd/spa_features.pxi\
+config.status: creating pxd/userquota_props.pxi\
+config.status: creating pxd/zpool_status.pxi\
+config.status: creating config.py\
+config.status: creating Makefile\
+rm -f libzfs.c\
+python3 setup.py build\
+/usr/lib/python3.12/site-packages/setuptools/__init__.py:80: _DeprecatedInstaller: setuptools.installer and fetch_build_eggs are deprecated.\
+!!\
+\
+        ********************************************************************************\
+        Requirements should be satisfied by a PEP 517 installer.\
+        If you are using pip, you can try `pip install --use-pep517`.\
+        ********************************************************************************\
+\
+!!\
+  dist.fetch_build_eggs(dist.setup_requires)\
+WARNING: The wheel package is not available.\
+running build\
+running build_ext\
+cythoning libzfs.pyx to libzfs.c\
+building 'libzfs' extension\
+gcc -fno-strict-overflow -Wsign-compare -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DNDEBUG -fcf-protection -fexceptions -fcf-protection -fexceptions -fcf-protection -fexceptions -O3 -fPIC -I/usr/include/python3.12 -c libzfs.c -o build/temp.linux-x86_64-cpython-312/libzfs.o -DCYTHON_FALLTHROUGH -I/usr/include/libzfs -I/usr/include/libspl -D_MACHINE_ENDIAN_H_ -DHAVE_ISSETUGID -D_GNU_SOURCE -Werror=implicit-function-declaration\
+libzfs.c: In function \'91__pyx_f_6libzfs_6NVList___get_value\'92:\
+libzfs.c:6365:47: error: passing argument 2 of \'91nvpair_value_string\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+ 6365 |     (void)(nvpair_value_string(__pyx_v_pair, (&__pyx_v_cstr)));\
+      |                                              ~^~~~~~~~~~~~~~\
+      |                                               |\
+      |                                               char **\
+In file included from /usr/include/libzfs/libnvpair.h:30,\
+                 from /usr/include/libzfs/libzfs.h:41,\
+                 from libzfs.c:748:\
+/usr/include/libzfs/sys/nvpair.h:294:57: note: expected \'91const char **\'92 but argument is of type \'91char **\'92\
+  294 | _SYS_NVPAIR_H int nvpair_value_string(const nvpair_t *, const char **);\
+      |                                                         ^~~~~~~~~~~~~\
+libzfs.c:7338:53: error: passing argument 2 of \'91nvpair_value_string_array\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+ 7338 |     (void)(nvpair_value_string_array(__pyx_v_pair, ((char ***)(&__pyx_v_carray)), (&__pyx_v_carraylen)));\
+      |                                                    ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                     |\
+      |                                                     char ***\
+/usr/include/libzfs/sys/nvpair.h:307:57: note: expected \'91const char ***\'92 but argument is of type \'91char ***\'92\
+  307 | _SYS_NVPAIR_H int nvpair_value_string_array(nvpair_t *, const char ***,\
+      |                                                         ^~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_6NVList_15set\'92:\
+libzfs.c:9200:73: error: passing argument 3 of \'91nvlist_add_string_array\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+ 9200 |   (void)(nvlist_add_string_array(__pyx_v_self->handle, __pyx_t_34, ((char **)__pyx_v_carray), __pyx_t_29));\
+      |                                                                    ~^~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     char **\
+\
+/usr/include/libzfs/sys/nvpair.h:205:5: note: expected \'91const char * const*\'92 but argument is of type \'91char **\'92\
+  205 |     const char * const *, uint_t);\
+      |     ^~~~~~~~~~~~~~~~~~~~\
+libzfs.c:10586:73: error: passing argument 3 of \'91nvlist_add_nvlist_array\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+10586 |   (void)(nvlist_add_nvlist_array(__pyx_v_self->handle, __pyx_t_45, ((nvlist_t **)__pyx_v_carray), __pyx_t_29));\
+      |                                                                    ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     nvlist_t ** \{aka struct nvlist **\}\
+\
+/usr/include/libzfs/sys/nvpair.h:207:5: note: expected \'91const nvlist_t * const*\'92 \{aka \'91const struct nvlist * const*\'92\} but argument is of type \'91nvlist_t **\'92 \{aka \'91struct nvlist **\'92\}\
+  207 |     const nvlist_t * const *, uint_t);\
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_gb_6libzfs_7ZFSPool_14generator9\'92:\
+libzfs.c:57437:3: warning: \'91Py_OptimizeFlag\'92 is deprecated [-Wdeprecated-declarations]\
+57437 |   if (unlikely(!Py_OptimizeFlag)) \{\
+      |   ^~\
+In file included from /usr/include/python3.12/Python.h:48,\
+                 from libzfs.c:6:\
+/usr/include/python3.12/cpython/pydebug.h:13:37: note: declared here\
+   13 | Py_DEPRECATED(3.12) PyAPI_DATA(int) Py_OptimizeFlag;\
+      |                                     ^~~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_7ZFSPool_11status_code___get__\'92:\
+libzfs.c:59152:89: error: passing argument 2 of \'91zpool_get_status\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+59152 | x_PyInt_From_zpool_status_t(zpool_get_status(__pyx_v_self->handle, (&__pyx_v_msg_id), NULL)); if (unlikely(!__pyx_t_4)) __PYX_ERR(2, 2848, __pyx_L1_error)\
+      |                                                                    ~^~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     char **\
+\
+/usr/include/libzfs/libzfs.h:471:61: note: expected \'91const char **\'92 but argument is of type \'91char **\'92\
+  471 | _LIBZFS_H zpool_status_t zpool_get_status(zpool_handle_t *, const char **,\
+      |                                                             ^~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_7ZFSPool_29attach_vdevs\'92:\
+libzfs.c:63768:23: error: too few arguments to function \'91zpool_add\'92\
+63768 |         __pyx_v_ret = zpool_add(__pyx_v_self->handle, __pyx_v_vd->nvlist->handle);\
+      |                       ^~~~~~~~~\
+/usr/include/libzfs/libzfs.h:267:15: note: declared here\
+  267 | _LIBZFS_H int zpool_add(zpool_handle_t *, nvlist_t *, boolean_t check_ashift);\
+      |               ^~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_11ZFSResource_5userspace\'92:\
+libzfs.c:72788:86: error: passing argument 3 of \'91zfs_userspace\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+72788 | _ret = zfs_userspace(__pyx_v_self->__pyx_base.handle, __pyx_v_prop, __pyx_f_6libzfs_11ZFSResource__userspace_cb, ((void *)__pyx_v_result));\
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     int (*)(void *, const char *, uint32_t,  uint64_t) \{aka int (*)(void *, const char *, unsigned int,  long unsigned int)\}\
+\
+/usr/include/libzfs/libzfs.h:877:5: note: expected \'91zfs_userspace_cb_t\'92 \{aka \'91int (*)(void *, const char *, unsigned int,  long unsigned int,  long unsigned int)\'92\} but argument is of type \'91int (*)(void *, const char *, uint32_t,  uint64_t)\'92 \{aka \'91int (*)(void *, const char *, unsigned int,  long unsigned int)\'92\}\
+  877 |     zfs_userspace_cb_t, void *);\
+      |     ^~~~~~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_10ZFSDataset_12destroy_snapshot\'92:\
+libzfs.c:83607:85: warning: passing argument 2 of \'91zfs_destroy_snaps\'92 discards \'91const\'92 qualifier from pointer target type [-Wdiscarded-qualifiers]\
+83607 | ret = zfs_destroy_snaps(__pyx_v_self->__pyx_base.__pyx_base.handle, __pyx_v_c_name, __pyx_v_defer_deletion);\
+      |                                                                     ^~~~~~~~~~~~~~\
+\
+/usr/include/libzfs/libzfs.h:771:49: note: expected \'91char *\'92 but argument is of type \'91const char *\'92\
+  771 | _LIBZFS_H int zfs_destroy_snaps(zfs_handle_t *, char *, boolean_t);\
+      |                                                 ^~~~~~\
+error: command '/usr/bin/gcc' failed with exit code 1\
+make: *** [Makefile:20: libzfs.c] Error 1\
+python3 setup.py install --prefix /usr/local\
+/usr/lib/python3.12/site-packages/setuptools/__init__.py:80: _DeprecatedInstaller: setuptools.installer and fetch_build_eggs are deprecated.\
+!!\
+\
+        ********************************************************************************\
+        Requirements should be satisfied by a PEP 517 installer.\
+        If you are using pip, you can try `pip install --use-pep517`.\
+        ********************************************************************************\
+\
+!!\
+  dist.fetch_build_eggs(dist.setup_requires)\
+WARNING: The wheel package is not available.\
+running install\
+/usr/lib/python3.12/site-packages/setuptools/_distutils/cmd.py:66: SetuptoolsDeprecationWarning: setup.py install is deprecated.\
+!!\
+\
+        ********************************************************************************\
+        Please avoid running ``setup.py`` directly.\
+        Instead, use pypa/build, pypa/installer or other\
+        standards-based tools.\
+\
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.\
+        ********************************************************************************\
+\
+!!\
+  self.initialize_options()\
+/usr/lib/python3.12/site-packages/setuptools/_distutils/cmd.py:66: EasyInstallDeprecationWarning: easy_install command is deprecated.\
+!!\
+\
+        ********************************************************************************\
+        Please avoid running ``setup.py`` and ``easy_install``.\
+        Instead, use pypa/build, pypa/installer or other\
+        standards-based tools.\
+\
+        See https://github.com/pypa/setuptools/issues/917 for details.\
+        ********************************************************************************\
+\
+!!\
+  self.initialize_options()\
+running bdist_egg\
+running egg_info\
+writing libzfs.egg-info/PKG-INFO\
+writing dependency_links to libzfs.egg-info/dependency_links.txt\
+writing top-level names to libzfs.egg-info/top_level.txt\
+reading manifest file 'libzfs.egg-info/SOURCES.txt'\
+adding license file 'LICENSE'\
+writing manifest file 'libzfs.egg-info/SOURCES.txt'\
+installing library code to build/bdist.linux-x86_64/egg\
+running install_lib\
+running build_ext\
+skipping 'libzfs.c' Cython extension (up-to-date)\
+building 'libzfs' extension\
+gcc -fno-strict-overflow -Wsign-compare -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DNDEBUG -fcf-protection -fexceptions -fcf-protection -fexceptions -fcf-protection -fexceptions -O3 -fPIC -I/usr/include/python3.12 -c libzfs.c -o build/temp.linux-x86_64-cpython-312/libzfs.o -DCYTHON_FALLTHROUGH -I/usr/include/libzfs -I/usr/include/libspl -D_MACHINE_ENDIAN_H_ -DHAVE_ISSETUGID -D_GNU_SOURCE -Werror=implicit-function-declaration\
+libzfs.c: In function \'91__pyx_f_6libzfs_6NVList___get_value\'92:\
+libzfs.c:6365:47: error: passing argument 2 of \'91nvpair_value_string\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+ 6365 |     (void)(nvpair_value_string(__pyx_v_pair, (&__pyx_v_cstr)));\
+      |                                              ~^~~~~~~~~~~~~~\
+      |                                               |\
+      |                                               char **\
+In file included from /usr/include/libzfs/libnvpair.h:30,\
+                 from /usr/include/libzfs/libzfs.h:41,\
+                 from libzfs.c:748:\
+/usr/include/libzfs/sys/nvpair.h:294:57: note: expected \'91const char **\'92 but argument is of type \'91char **\'92\
+  294 | _SYS_NVPAIR_H int nvpair_value_string(const nvpair_t *, const char **);\
+      |                                                         ^~~~~~~~~~~~~\
+libzfs.c:7338:53: error: passing argument 2 of \'91nvpair_value_string_array\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+ 7338 |     (void)(nvpair_value_string_array(__pyx_v_pair, ((char ***)(&__pyx_v_carray)), (&__pyx_v_carraylen)));\
+      |                                                    ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                     |\
+      |                                                     char ***\
+/usr/include/libzfs/sys/nvpair.h:307:57: note: expected \'91const char ***\'92 but argument is of type \'91char ***\'92\
+  307 | _SYS_NVPAIR_H int nvpair_value_string_array(nvpair_t *, const char ***,\
+      |                                                         ^~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_6NVList_15set\'92:\
+libzfs.c:9200:73: error: passing argument 3 of \'91nvlist_add_string_array\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+ 9200 |   (void)(nvlist_add_string_array(__pyx_v_self->handle, __pyx_t_34, ((char **)__pyx_v_carray), __pyx_t_29));\
+      |                                                                    ~^~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     char **\
+\
+/usr/include/libzfs/sys/nvpair.h:205:5: note: expected \'91const char * const*\'92 but argument is of type \'91char **\'92\
+  205 |     const char * const *, uint_t);\
+      |     ^~~~~~~~~~~~~~~~~~~~\
+libzfs.c:10586:73: error: passing argument 3 of \'91nvlist_add_nvlist_array\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+10586 |   (void)(nvlist_add_nvlist_array(__pyx_v_self->handle, __pyx_t_45, ((nvlist_t **)__pyx_v_carray), __pyx_t_29));\
+      |                                                                    ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     nvlist_t ** \{aka struct nvlist **\}\
+\
+/usr/include/libzfs/sys/nvpair.h:207:5: note: expected \'91const nvlist_t * const*\'92 \{aka \'91const struct nvlist * const*\'92\} but argument is of type \'91nvlist_t **\'92 \{aka \'91struct nvlist **\'92\}\
+  207 |     const nvlist_t * const *, uint_t);\
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_gb_6libzfs_7ZFSPool_14generator9\'92:\
+libzfs.c:57437:3: warning: \'91Py_OptimizeFlag\'92 is deprecated [-Wdeprecated-declarations]\
+57437 |   if (unlikely(!Py_OptimizeFlag)) \{\
+      |   ^~\
+In file included from /usr/include/python3.12/Python.h:48,\
+                 from libzfs.c:6:\
+/usr/include/python3.12/cpython/pydebug.h:13:37: note: declared here\
+   13 | Py_DEPRECATED(3.12) PyAPI_DATA(int) Py_OptimizeFlag;\
+      |                                     ^~~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_7ZFSPool_11status_code___get__\'92:\
+libzfs.c:59152:89: error: passing argument 2 of \'91zpool_get_status\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+59152 | x_PyInt_From_zpool_status_t(zpool_get_status(__pyx_v_self->handle, (&__pyx_v_msg_id), NULL)); if (unlikely(!__pyx_t_4)) __PYX_ERR(2, 2848, __pyx_L1_error)\
+      |                                                                    ~^~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     char **\
+\
+/usr/include/libzfs/libzfs.h:471:61: note: expected \'91const char **\'92 but argument is of type \'91char **\'92\
+  471 | _LIBZFS_H zpool_status_t zpool_get_status(zpool_handle_t *, const char **,\
+      |                                                             ^~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_7ZFSPool_29attach_vdevs\'92:\
+libzfs.c:63768:23: error: too few arguments to function \'91zpool_add\'92\
+63768 |         __pyx_v_ret = zpool_add(__pyx_v_self->handle, __pyx_v_vd->nvlist->handle);\
+      |                       ^~~~~~~~~\
+/usr/include/libzfs/libzfs.h:267:15: note: declared here\
+  267 | _LIBZFS_H int zpool_add(zpool_handle_t *, nvlist_t *, boolean_t check_ashift);\
+      |               ^~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_11ZFSResource_5userspace\'92:\
+libzfs.c:72788:86: error: passing argument 3 of \'91zfs_userspace\'92 from incompatible pointer type [-Wincompatible-pointer-types]\
+72788 | _ret = zfs_userspace(__pyx_v_self->__pyx_base.handle, __pyx_v_prop, __pyx_f_6libzfs_11ZFSResource__userspace_cb, ((void *)__pyx_v_result));\
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      |                                                                     |\
+      |                                                                     int (*)(void *, const char *, uint32_t,  uint64_t) \{aka int (*)(void *, const char *, unsigned int,  long unsigned int)\}\
+\
+/usr/include/libzfs/libzfs.h:877:5: note: expected \'91zfs_userspace_cb_t\'92 \{aka \'91int (*)(void *, const char *, unsigned int,  long unsigned int,  long unsigned int)\'92\} but argument is of type \'91int (*)(void *, const char *, uint32_t,  uint64_t)\'92 \{aka \'91int (*)(void *, const char *, unsigned int,  long unsigned int)\'92\}\
+  877 |     zfs_userspace_cb_t, void *);\
+      |     ^~~~~~~~~~~~~~~~~~\
+libzfs.c: In function \'91__pyx_pf_6libzfs_10ZFSDataset_12destroy_snapshot\'92:\
+libzfs.c:83607:85: warning: passing argument 2 of \'91zfs_destroy_snaps\'92 discards \'91const\'92 qualifier from pointer target type [-Wdiscarded-qualifiers]\
+83607 | ret = zfs_destroy_snaps(__pyx_v_self->__pyx_base.__pyx_base.handle, __pyx_v_c_name, __pyx_v_defer_deletion);\
+      |                                                                     ^~~~~~~~~~~~~~\
+\
+/usr/include/libzfs/libzfs.h:771:49: note: expected \'91char *\'92 but argument is of type \'91const char *\'92\
+  771 | _LIBZFS_H int zfs_destroy_snaps(zfs_handle_t *, char *, boolean_t);\
+      |                                                 ^~~~~~\
+error: command '/bin/gcc' failed with exit code 1\
+make: *** [Makefile:26: install] Error 1\
+justin@srv:~/python3-libzfs$ cd ..\
+justin@srv:~$ rm -r python3-libzfs/\
+rm: remove write-protected regular file 'python3-libzfs/.git/objects/pack/pack-d893327c102105cff12996b03221bbd9b548cfaf.pack'? sudo    \
+rm: remove write-protected regular file 'python3-libzfs/.git/objects/pack/pack-d893327c102105cff12996b03221bbd9b548cfaf.rev'? ^C}

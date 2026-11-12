@@ -451,6 +451,69 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM(
 )
 
 
+dnl OpenZFS 2.4 API changes. Treat incompatible pointer warnings as errors
+dnl during these probes only, including on older GCC versions.
+py_libzfs_save_CFLAGS=$CFLAGS
+CFLAGS="$CFLAGS -Werror=incompatible-pointer-types"
+
+AC_MSG_CHECKING([HAVE_ZPOOL_ADD])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [zpool_add(NULL, NULL, 1);]
+)], [AC_SUBST(HAVE_ZPOOL_ADD, 3)], [AC_SUBST(HAVE_ZPOOL_ADD, 2)])
+AC_MSG_RESULT([$HAVE_ZPOOL_ADD])
+
+AC_MSG_CHECKING([HAVE_ZFS_USERSPACE_CB])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [zfs_userspace_cb_t cb = NULL;
+(void) cb(NULL, NULL, 0, 0, 0);]
+)], [AC_SUBST(HAVE_ZFS_USERSPACE_CB, 5)], [AC_SUBST(HAVE_ZFS_USERSPACE_CB, 4)])
+AC_MSG_RESULT([$HAVE_ZFS_USERSPACE_CB])
+
+AC_MSG_CHECKING([HAVE_ZPOOL_GET_STATUS_CONST])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [const char *value;
+(void) zpool_get_status(NULL, &value, NULL);]
+)], [AC_SUBST(HAVE_ZPOOL_GET_STATUS_CONST, 1)], [AC_SUBST(HAVE_ZPOOL_GET_STATUS_CONST, 0)])
+AC_MSG_RESULT([$HAVE_ZPOOL_GET_STATUS_CONST])
+
+AC_MSG_CHECKING([HAVE_NVPAIR_VALUE_STRING_CONST])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [const char *value;
+(void) nvpair_value_string(NULL, &value);]
+)], [AC_SUBST(HAVE_NVPAIR_VALUE_STRING_CONST, 1)], [AC_SUBST(HAVE_NVPAIR_VALUE_STRING_CONST, 0)])
+AC_MSG_RESULT([$HAVE_NVPAIR_VALUE_STRING_CONST])
+
+AC_MSG_CHECKING([HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [const char **value;
+uint_t count;
+(void) nvpair_value_string_array(NULL, &value, &count);]
+)], [AC_SUBST(HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST, 1)], [AC_SUBST(HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST, 0)])
+AC_MSG_RESULT([$HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST])
+
+AC_MSG_CHECKING([HAVE_NVLIST_ADD_STRING_ARRAY_CONST])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [const char *value = NULL;
+(void) nvlist_add_string_array(NULL, NULL, &value, 0);]
+)], [AC_SUBST(HAVE_NVLIST_ADD_STRING_ARRAY_CONST, 1)], [AC_SUBST(HAVE_NVLIST_ADD_STRING_ARRAY_CONST, 0)])
+AC_MSG_RESULT([$HAVE_NVLIST_ADD_STRING_ARRAY_CONST])
+
+AC_MSG_CHECKING([HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [#include <libzfs.h>],
+    [const nvlist_t *value = NULL;
+(void) nvlist_add_nvlist_array(NULL, NULL, &value, 0);]
+)], [AC_SUBST(HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST, 1)], [AC_SUBST(HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST, 0)])
+AC_MSG_RESULT([$HAVE_NVLIST_ADD_NVLIST_ARRAY_CONST])
+
+CFLAGS=$py_libzfs_save_CFLAGS
+
 dnl Checking function signature of zpool_get_status
 
 AC_MSG_NOTICE([Checking function signature of zpool_get_status])
