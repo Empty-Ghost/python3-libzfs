@@ -2732,7 +2732,8 @@ cdef class ZFSPool(object):
             valid_vdev_types = ('data', 'log', 'spare', 'cache', 'special', 'dedup')
         ELSE:
             valid_vdev_types = ('data', 'log', 'spare', 'cache')
-        assert vdev_type in valid_vdev_types
+        if vdev_type not in valid_vdev_types:
+            raise AssertionError
 
         cdef ZFSVdev vdev
         cdef NVList vdev_tree = self.get_raw_config().get_raw(zfs.ZPOOL_CONFIG_VDEV_TREE)
@@ -4027,7 +4028,9 @@ cdef class ZFSDataset(ZFSResource):
                 self.properties['keylocation'].value = 'prompt'
 
     def destroy_snapshot(self, name, defer=True):
-        cdef const char *c_name = name
+        # libzfs takes a mutable char *, so keep a writable copy alive for the call.
+        cdef bytearray name_buffer = bytearray(name.encode() if isinstance(name, str) else name)
+        cdef char *c_name = name_buffer
         cdef int ret
         cdef int defer_deletion = defer
 

@@ -24,6 +24,8 @@
 # SUCH DAMAGE.
 #
 import platform
+from pathlib import Path
+import runpy
 import sys
 from collections import namedtuple
 from setuptools import setup
@@ -34,10 +36,16 @@ try:
 except ImportError:
     raise ImportError("This package requires Cython to build properly. Please install it first.")
 
-try:
-    import config
-except ImportError:
-    if 'build' in sys.argv or 'install' in sys.argv:
+config_file = Path(__file__).resolve().parent / 'config.py'
+if config_file.is_file():
+    # PEP 517 backends do not necessarily put the source directory on sys.path.
+    config_values = runpy.run_path(str(config_file))
+    config = namedtuple('config', ['CFLAGS', 'CPPFLAGS', 'LDFLAGS'])(
+        *(config_values[name] for name in ('CFLAGS', 'CPPFLAGS', 'LDFLAGS'))
+    )
+else:
+    if any(command in sys.argv for command in
+           ('build', 'build_ext', 'install', 'bdist_wheel', 'editable_wheel')):
         raise ImportError('Please execute configure script first')
     else:
         config = namedtuple('config', ['CFLAGS', 'CPPFLAGS', 'LDFLAGS'])([], [], [])
@@ -51,10 +59,6 @@ if platform.system().lower() == 'freebsd':
 setup(
     name='libzfs',
     version='1.1',
-    setup_requires=[
-        'setuptools>=18.0',
-        'Cython',
-    ],
     cmdclass={'build_ext': build_ext},
     ext_modules=[
         Extension(

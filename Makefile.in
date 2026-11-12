@@ -1,11 +1,17 @@
 PYTHON ?= python3
 PREFIX ?= @prefix@
 
+.PHONY: build clean install
+.DELETE_ON_ERROR:
+
 PXIS = \
 	converter.pxi \
 	nvpair.pxi \
 	pxd/config.pxi \
-	pxd/sendflags.pxi
+	pxd/sendflags.pxi \
+	pxd/spa_features.pxi \
+	pxd/userquota_props.pxi \
+	pxd/zpool_status.pxi
 
 PXDS = \
 	pxd/libzfs.pxd \
@@ -14,10 +20,11 @@ PXDS = \
 	pxd/zfs.pxd
 
 build: libzfs.c
-
-libzfs.c: libzfs.pyx ${PXIS} ${PXDS}
-	rm -f libzfs.c
 	${PYTHON} setup.py build
+
+libzfs.c: libzfs.pyx ${PXIS} ${PXDS} config.py setup.py pyproject.toml
+	rm -f libzfs.c
+	${PYTHON} -m cython -I ./pxd libzfs.pyx
 
 clean:
 	rm -rf build libzfs.c

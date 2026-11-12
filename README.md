@@ -10,6 +10,11 @@ py-libzfs is a fairly straight-forward set of Python bindings for libzfs for ZFS
 
 `./configure && make install`
 
+For builds with Make, install the Python build dependencies first with
+`python3 -m pip install -r setup_requires.txt setuptools`. The bindings use
+Cython 0.29; Cython 3 is not yet supported. Isolated pip builds select the
+compatible Cython version through `pyproject.toml`.
+
 After updating the bindings or OpenZFS development headers, rerun configure
 and rebuild so the API checks and generated C code are refreshed:
 

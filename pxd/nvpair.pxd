@@ -4,14 +4,14 @@
 include "config.pxi"
 
 IF HAVE_NVPAIR_VALUE_STRING_CONST:
-    ctypedef const char nvpair_string_char
+	ctypedef const char nvpair_string_char
 ELSE:
-    ctypedef char nvpair_string_char
+	ctypedef char nvpair_string_char
 
 IF HAVE_NVPAIR_VALUE_STRING_ARRAY_CONST:
-    ctypedef const char nvpair_string_array_char
+	ctypedef const char nvpair_string_array_char
 ELSE:
-    ctypedef char nvpair_string_array_char
+	ctypedef char nvpair_string_array_char
 
 
 IF HAVE_NVPAIR_IN_SYS:
